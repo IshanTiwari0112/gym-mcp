@@ -9,10 +9,28 @@ A Model Context Protocol (MCP) server that exposes games as tools for AI agents 
 - MCP-compatible client (Claude Desktop, etc.)
 
 ### Installation
+
+Using pip:
 ```bash
 git clone <this-repo>
 cd gym-mcp
 pip install -e .
+```
+
+Or using uv (recommended by Dedalus Labs):
+```bash
+git clone <this-repo>
+cd gym-mcp
+uv sync
+```
+
+### Run the Server
+```bash
+# With pip
+python main.py
+
+# With uv
+uv run main
 ```
 
 ### Test the Server
@@ -45,7 +63,8 @@ Add to your Claude Desktop `claude_desktop_config.json`:
   "mcpServers": {
     "gym-mcp": {
       "command": "python",
-      "args": ["-m", "gym_mcp.main"]
+      "args": ["main.py"],
+      "cwd": "/path/to/gym-mcp"
     }
   }
 }

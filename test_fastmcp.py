@@ -13,7 +13,7 @@ async def test_server():
     # Connect to our server
     server_params = StdioServerParameters(
         command="python",
-        args=["-m", "mcp_games.server"]
+        args=["main.py"]
     )
 
     async with stdio_client(server_params) as (read, write):

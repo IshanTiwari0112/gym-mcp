@@ -5,6 +5,9 @@ from uuid import uuid4
 
 from .types import Game, GameResult
 from .tic_tac_toe import TicTacToe
+from .cartpole import CartPole
+from .breakout import AtariBreakout
+from .mountain_car import MountainCar
 
 
 class GameRegistry:
@@ -15,7 +18,17 @@ class GameRegistry:
 
     def _register_default_games(self):
         """Register built-in games"""
+        # Custom games
         self.register_game_type(TicTacToe)
+
+        # Gymnasium environments
+        try:
+            self.register_game_type(CartPole)
+            self.register_game_type(MountainCar)
+            self.register_game_type(AtariBreakout)
+        except ImportError:
+            # Gymnasium not available, skip
+            pass
 
     def register_game_type(self, game_class: Type[Game]):
         """Register a new game type"""

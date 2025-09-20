@@ -11,7 +11,7 @@ async def simple_win_demo():
     """Demo Alice winning with top row"""
 
     server_params = StdioServerParameters(
-        command="python", args=["-m", "mcp_games.server"]
+        command="python", args=["main.py"]
     )
 
     async with stdio_client(server_params) as (read, write):

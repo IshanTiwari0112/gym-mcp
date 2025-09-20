@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "gym-mcp": {
+      "command": "python",
+      "args": ["main.py"],
+      "cwd": "/Users/itsis/mcp-games",
+      "env": {}
+    }
+  }
+}
