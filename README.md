@@ -1,4 +1,4 @@
-# MCP Games - AI Gaming Platform
+# Gym MCP  - AI Gaming Platform
 
 A Model Context Protocol (MCP) server that exposes games as tools for AI agents to discover and play.
 
@@ -11,7 +11,7 @@ A Model Context Protocol (MCP) server that exposes games as tools for AI agents 
 ### Installation
 ```bash
 git clone <this-repo>
-cd mcp-games
+cd gym-mcp
 pip install -e .
 ```
 
@@ -43,9 +43,9 @@ Add to your Claude Desktop `claude_desktop_config.json`:
 ```json
 {
   "mcpServers": {
-    "mcp-games": {
+    "gym-mcp": {
       "command": "python",
-      "args": ["-m", "mcp_games.server"]
+      "args": ["-m", "gym_mcp.main"]
     }
   }
 }

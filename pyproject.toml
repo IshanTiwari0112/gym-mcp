@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "mcp-games"
+name = "gym-mcp"
 version = "0.1.0"
 description = "MCP server for AI gaming - wraps games as tools"
 authors = [{name = "MCP Games", email = "games@example.com"}]

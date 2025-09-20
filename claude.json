@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "mcp-games": {
-      "command": "python",
-      "args": ["-m", "mcp_games.server"],
-      "env": {}
-    }
-  }
-}

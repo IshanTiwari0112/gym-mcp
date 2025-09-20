@@ -1,1 +1,0 @@
-"""MCP tools for game operations"""

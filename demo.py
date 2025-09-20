@@ -11,7 +11,7 @@ async def play_full_game():
     """Play a complete tic-tac-toe game"""
 
     server_params = StdioServerParameters(
-        command="python", args=["-m", "mcp_games.server"]
+        command="python", args=["-m", "gym_mcp.main"]
     )
 
     async with stdio_client(server_params) as (read, write):
