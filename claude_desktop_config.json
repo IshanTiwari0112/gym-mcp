@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "gym-mcp": {
-      "command": "python",
-      "args": ["main.py"],
+      "command": "/Users/itsis/mcp-games/gym_mcp_env/bin/python",
+      "args": ["/Users/itsis/mcp-games/main.py"],
       "cwd": "/Users/itsis/mcp-games",
       "env": {}
     }

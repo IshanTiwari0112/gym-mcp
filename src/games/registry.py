@@ -8,6 +8,7 @@ from .tic_tac_toe import TicTacToe
 from .cartpole import CartPole
 from .breakout import AtariBreakout
 from .mountain_car import MountainCar
+from .blackjack import Blackjack
 
 
 class GameRegistry:
@@ -26,6 +27,7 @@ class GameRegistry:
             self.register_game_type(CartPole)
             self.register_game_type(MountainCar)
             self.register_game_type(AtariBreakout)
+            self.register_game_type(Blackjack)
         except ImportError:
             # Gymnasium not available, skip
             pass

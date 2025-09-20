@@ -11,6 +11,11 @@ import sys
 import os
 from pathlib import Path
 
+# Debug info for troubleshooting
+print(f"DEBUG: Starting MCP server from {__file__}", file=sys.stderr)
+print(f"DEBUG: Working directory: {os.getcwd()}", file=sys.stderr)
+print(f"DEBUG: Python path: {sys.path[:3]}...", file=sys.stderr)
+
 # Ensure src is in Python path
 src_path = Path(__file__).parent / "src"
 if str(src_path) not in sys.path:

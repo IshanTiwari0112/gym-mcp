@@ -284,6 +284,85 @@ def breakout_left(game_id: str, player: str) -> str:
         return f"Action failed: {result.error}"
 
 
+# Blackjack-specific tools
+@mcp.tool()
+def blackjack_hit(game_id: str, player: str) -> str:
+    """Take another card in Blackjack"""
+    game = registry.get_game(game_id)
+    if not game or game.type != "Blackjack-v1":
+        return f"Blackjack game {game_id} not found"
+
+    from games.types import GameAction
+    action = GameAction(
+        player=player,
+        type="gym_step",
+        payload={"action": 1}  # 1 = Hit in Blackjack
+    )
+
+    result = game.make_move(action)
+
+    if result.success:
+        meta = result.new_state.metadata
+        response = f"Hit! Your hand: {meta.get('player_hand', '?')}"
+        response += f", Dealer showing: {meta.get('dealer_showing', '?')}"
+        if meta.get('has_usable_ace'):
+            response += " (You have a usable ace)"
+        if result.new_state.status.value == "completed":
+            response += f"\nGame Over: {meta.get('result', 'Game ended')}"
+        return response
+    else:
+        return f"Hit failed: {result.error}"
+
+
+@mcp.tool()
+def blackjack_stand(game_id: str, player: str) -> str:
+    """Keep current hand in Blackjack"""
+    game = registry.get_game(game_id)
+    if not game or game.type != "Blackjack-v1":
+        return f"Blackjack game {game_id} not found"
+
+    from games.types import GameAction
+    action = GameAction(
+        player=player,
+        type="gym_step",
+        payload={"action": 0}  # 0 = Stand in Blackjack
+    )
+
+    result = game.make_move(action)
+
+    if result.success:
+        meta = result.new_state.metadata
+        response = f"Stand! Final hand: {meta.get('player_hand', '?')}"
+        response += f"\nDealer had: {meta.get('dealer_showing', '?')}"
+        response += f"\nResult: {meta.get('result', 'Game ended')}"
+        response += f"\nTotal reward: {result.new_state.state.get('episode_reward', 0)}"
+        return response
+    else:
+        return f"Stand failed: {result.error}"
+
+
+@mcp.tool()
+def blackjack_status(game_id: str) -> str:
+    """Get current Blackjack game status"""
+    game = registry.get_game(game_id)
+    if not game or game.type != "Blackjack-v1":
+        return f"Blackjack game {game_id} not found"
+
+    state = game.get_state()
+    meta = state.metadata
+
+    status = f"🃏 Blackjack Status:\n"
+    status += f"Your hand: {meta.get('player_hand', '?')}\n"
+    status += f"Dealer showing: {meta.get('dealer_showing', '?')}\n"
+    status += f"Usable ace: {'Yes' if meta.get('has_usable_ace') else 'No'}\n"
+    status += f"Game status: {state.status.value}\n"
+
+    if state.status.value == "completed":
+        status += f"Result: {meta.get('result', 'Game ended')}"
+
+    return status
+
+
 async def main():
     """Main entry point - async to match Dedalus pattern"""
     # Run the FastMCP server synchronously (FastMCP handles its own event loop)
